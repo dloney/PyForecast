@@ -54,21 +54,20 @@ class menuBar(object):
 
         with open(fname, 'wb') as writefile:
             
-            pickle.dump(self.datasetTable, writefile, pickle.HIGHEST_PROTOCOL)
-            pickle.dump(self.dataTable, writefile, pickle.HIGHEST_PROTOCOL)
-            pickle.dump(self.modelRunsTable, writefile, pickle.HIGHEST_PROTOCOL)
-            pickle.dump(self.forecastEquationsTable, writefile, pickle.HIGHEST_PROTOCOL)
-            pickle.dump(self.forecastsTable, writefile, pickle.HIGHEST_PROTOCOL)
+            pickle.dump(self.datasetTable, writefile)#, pickle.HIGHEST_PROTOCOL)
+            pickle.dump(self.dataTable, writefile)#, pickle.HIGHEST_PROTOCOL)
+            pickle.dump(self.modelRunsTable, writefile)#, pickle.HIGHEST_PROTOCOL)
+            pickle.dump(self.forecastEquationsTable, writefile)#, pickle.HIGHEST_PROTOCOL)
+            pickle.dump(self.forecastsTable, writefile)#, pickle.HIGHEST_PROTOCOL)
 
             with open('resources/temp/user_options.txt', 'r') as readfile:
-                pickle.dump(readfile.read(), writefile, pickle.HIGHEST_PROTOCOL)
-        
+                pickle.dump(readfile.read(), writefile)#, pickle.HIGHEST_PROTOCOL)
 
     def openForecastFile(self):
         """
         """
         fname = QFileDialog.getOpenFileName(self, 'Open File','*.fcst')[0]
-        self.applicationPrefsConfig['FILE OPS']['file_name'] = fname
+        self.userOptionsConfig['FILE OPS']['file_name'] = fname
 
         if fname == '':
             return 
@@ -87,4 +86,4 @@ class menuBar(object):
 
         # Apply the files and tables to the tabs
         self.resetDatasetTab()
-        self.resetDataTab()
+        self.initializeDataTab()#.resetDataTab()
